@@ -38,13 +38,13 @@ services:
     ports:
       - ${APP_HOST_PORT}:${APP_PORT}
     volumes:
-      - ./backend:/app  # Bind Mount pour tenez au courant le conteneur avec les changements local
-      - /app/node_modules  # Named Mount pour ne pas toucher les node_modules de conteneur
+      - ./backend:/app
+      - /app/node_modules
     environment:
       NODE_ENV: ${NODE_ENV}
       MONGODB_URI: ${MONGODB_URI}
     env_file:
-      - .env # Specify this so it is available within the container
+      - .env
     depends_on:
       db-mysql:
         condition: service_healthy
@@ -54,9 +54,9 @@ services:
     ports:
       - ${REACT_APP_HOST_PORT}:${REACT_APP_PORT}
     volumes:
-      - ./frontend-react:/app  # Bind Mount pour tenez au courant le conteneur avec les changements local
-      - /app/node_modules  # Named Mount pour ne pas toucher les node_modules de conteneur
+      - ./frontend-react:/app
+      - /app/node_modules 
     depends_on:
       - backend
     env_file:
-      - .env # Specify this so it is available within the container
+      - .env
